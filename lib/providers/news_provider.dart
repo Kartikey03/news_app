@@ -7,13 +7,11 @@ import '../models/article.dart';
 import '../models/source.dart';
 
 class NewsProvider extends ChangeNotifier {
-  // Use a free, non-auth API endpoint for demonstration purposes
-  // Since NewsAPI requires authentication for production, we'll use a sample endpoint
-  // Replace with your own API key and endpoint if available
+
   final String _baseUrl = 'https://newsapi.org/v2';
   final String _endpoint = '/top-headlines';
   final String _country = 'us';
-  final String _apiKey = '2d1a91774619408583c68962a9b97cce'; // Replace with your actual API key
+  final String _apiKey = '2d1a91774619408583c68962a9b97cce';
 
   List<Article> _articles = [];
   bool _isLoading = false;
@@ -29,8 +27,7 @@ class NewsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // For demonstration, if you don't have an API key, you can use a sample data
-      // approach or a different free API
+
       final response = await http.get(
         Uri.parse('$_baseUrl$_endpoint?country=$_country&apiKey=$_apiKey'),
       );
@@ -41,10 +38,10 @@ class NewsProvider extends ChangeNotifier {
             .map((article) => Article.fromJson(article))
             .toList();
       } else {
-        // Load sample data for any API failure
+
         _loadSampleData();
 
-        // Still show the error message for debugging
+
         if (response.statusCode == 401) {
           _error = 'API Key invalid or missing. Using sample data instead.';
         } else {
@@ -76,10 +73,9 @@ class NewsProvider extends ChangeNotifier {
             .map((article) => Article.fromJson(article))
             .toList();
       } else {
-        // Filter sample data to mimic search
         _searchSampleData(query);
 
-        // Still show the error message for debugging
+
         if (response.statusCode == 401) {
           _error = 'API Key invalid or missing. Using sample data instead.';
         } else {
@@ -95,35 +91,32 @@ class NewsProvider extends ChangeNotifier {
     }
   }
 
-  // Load sample data if API call fails
+
   void _loadSampleData() {
     _articles = _getRandomSampleArticles();
-    // Clear error to prevent showing error message when using sample data
+
     _error = '';
   }
 
-  // Filter sample data for search function
   void _searchSampleData(String query) {
     final sampleArticles = _getAllSampleArticles();
     _articles = sampleArticles.where((article) {
       return article.title.toLowerCase().contains(query.toLowerCase()) ||
           (article.description?.toLowerCase().contains(query.toLowerCase()) ?? false);
     }).toList();
-    // Clear error to prevent showing error message when using sample data
+
     _error = '';
   }
 
-  // Get a random selection of sample articles to simulate refreshed content
+
   List<Article> _getRandomSampleArticles() {
     final allArticles = _getAllSampleArticles();
     allArticles.shuffle();
 
-    // Take a random number of articles between 5 and the max available
     final random = Random();
-    final articleCount = random.nextInt(allArticles.length - 4) + 5; // At least 5 articles
+    final articleCount = random.nextInt(allArticles.length - 4) + 5;
 
     return allArticles.take(articleCount).map((article) {
-      // Add slight variations to make it feel like new content
       final minutesAgo = random.nextInt(60);
 
       return Article(
@@ -133,14 +126,12 @@ class NewsProvider extends ChangeNotifier {
         description: article.description,
         url: article.url,
         urlToImage: article.urlToImage,
-        // Vary the published time to make it look fresh
         publishedAt: DateTime.now().subtract(Duration(minutes: minutesAgo)),
         content: article.content,
       );
     }).toList();
   }
 
-  // Sample articles data pool for demonstration
   List<Article> _getAllSampleArticles() {
     return [
       Article(

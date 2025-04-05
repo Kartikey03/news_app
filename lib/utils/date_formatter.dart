@@ -1,11 +1,8 @@
-/// Utility class for formatting dates in the application
 class DateFormatter {
-  /// Formats a DateTime object to a dd/mm/yyyy string format
   static String formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';
   }
 
-  /// Formats a DateTime object to show relative time (e.g., "2 hours ago")
   static String formatRelativeTime(DateTime date) {
     final now = DateTime.now();
     final difference = now.difference(date);
@@ -25,7 +22,6 @@ class DateFormatter {
     }
   }
 
-  /// Formats a DateTime object to a full date format (e.g., "April 12, 2025")
   static String formatFullDate(DateTime date) {
     final months = [
       'January', 'February', 'March', 'April', 'May', 'June',

@@ -26,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
           _isLoading = false;
         });
 
-        // Navigate to news feed page after successful login
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const NewsFeedPage()),
