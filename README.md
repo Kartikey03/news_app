@@ -13,9 +13,6 @@ A modern news application built with Flutter that provides users with the latest
 - **Responsive Design**: Works on various screen sizes and orientations
 - **Light/Dark Mode**: Automatically adapts to system theme settings
 
-## Screenshots
-
-*[Add your app screenshots here]*
 
 ## Getting Started
 
